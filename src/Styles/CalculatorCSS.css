@@ -1,7 +1,7 @@
 .grid-props {
 	grid-template-rows: minmax(7rem, auto) repreat(5, 6rem);
-	grid-template-columns: repeat(4, 6rem);
+	grid-template-columns: repeat(6, 10rem);
 }
 button {
-	padding: 5px;
+	padding: 10px;
 }
