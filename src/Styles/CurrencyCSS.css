@@ -1,0 +1,15 @@
+@media (min-width: 300px) and (max-width: 1200px) {
+	#input-div {
+		display: flex !important;
+		flex-direction: column !important;
+		align-items: center !important;
+		margin-top: 1rem;
+	}
+}
+
+#calc {
+	transition: 500ms ease-in-out !important;
+}
+#calc:hover {
+	box-shadow: 0 0px 10px 3px #dedae1;
+}

@@ -1,9 +1,9 @@
 import "./App.css";
-import Calculator from "./Pages/Calculator";
+import CurrencyExchange from "./Pages/CurrencyExchange";
 function App() {
 	return (
 		<div className="App">
-			<Calculator />
+			<CurrencyExchange />
 		</div>
 	);
 }
