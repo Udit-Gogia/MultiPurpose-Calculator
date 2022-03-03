@@ -6,10 +6,3 @@
 		margin-top: 1rem;
 	}
 }
-
-#calc {
-	transition: 500ms ease-in-out !important;
-}
-#calc:hover {
-	box-shadow: 0 0px 10px 3px #dedae1;
-}

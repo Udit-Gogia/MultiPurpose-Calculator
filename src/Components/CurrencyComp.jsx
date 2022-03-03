@@ -22,8 +22,10 @@ function CEComp(props) {
 				value={selectedCurrency}
 				onChange={onChangingCurr}
 			>
-				{currencyOptions?.map((option) => (
-					<option value={option}>{option}</option>
+				{currencyOptions?.map((option, index) => (
+					<option key={index} value={option}>
+						{option}
+					</option>
 				))}
 			</select>
 		</div>

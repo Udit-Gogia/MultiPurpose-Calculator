@@ -7,7 +7,6 @@ const url =
 
 function CE() {
 	const [currencyOptions, setCurrencyOptions] = useState([]);
-
 	const [fromCurr, setFromCurr] = useState();
 	const [toCurr, setToCurr] = useState();
 	const [exchangerate, setExchangerate] = useState();
@@ -43,6 +42,14 @@ function CE() {
 		setAmount(e.target.value);
 		setAmountfrom(false);
 	}
+
+	useEffect(() => {
+		if (fromCurr != undefined && toCurr != undefined) {
+			fetch(`${url}?base=${fromCurr}&symbols=${toCurr}`)
+				.then((res) => res.json())
+				.then((data) => setExchangerate(data.rates[toCurr]));
+		}
+	}, [fromCurr, toCurr]);
 	return (
 		<div className="bg-[#1f1d21] w-screen h-screen p-4 flex items-center justify-center flex-col">
 			<div className="text-[#DEDAE1] text-5xl text-center">
@@ -53,20 +60,15 @@ function CE() {
 					currencyOptions={currencyOptions}
 					selectedCurrency={fromCurr}
 					onChangingCurr={(e) => setFromCurr(e.target.value)}
-					onChangingAmount={handleAmountChangeFrom}
+					onChangeAmount={handleAmountChangeFrom}
 					amount={fromamount}
 				/>
-				<div
-					className="text-[#DEDAE1] text-2xl bg-[#E85F5C] p-2 hover:bg-[#007CF0] rounded-xl "
-					id="calc"
-				>
-					<button>Calculate</button>
-				</div>
+				<div className="text-[#DEDAE1] text-5xl ">=</div>
 				<CEComp
 					currencyOptions={currencyOptions}
 					selectedCurrency={toCurr}
 					onChangingCurr={(e) => setToCurr(e.target.value)}
-					onChangingAmount={handleAmountChangeTo}
+					onChangeAmount={handleAmountChangeTo}
 					amount={toamount}
 				/>
 			</div>
