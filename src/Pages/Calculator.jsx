@@ -3,18 +3,22 @@ import "../Styles/CalculatorCSS.css";
 
 function Calculator() {
 	const [number, setNumber] = useState("");
+	const [value, setValue] = useState("0");
 	function Solve(e) {
-		console.log("clicked" + e.target.name);
 		setNumber(number.concat(e.target.name));
+		setValue(number.concat(e.target.name));
 	}
 	function Clear() {
 		setNumber("");
+		setValue("");
 	}
 	function Delete() {
 		setNumber(number.slice(0, number.length - 1));
+		setValue(number.slice(0, number.length - 1));
 	}
 	function Calculations() {
 		setNumber(eval(number).toString());
+		setValue(eval(number).toString());
 	}
 	function factorial() {
 		var i, f;
@@ -30,18 +34,23 @@ function Calculator() {
 	}
 	function Sin() {
 		setNumber(Math.sin(number).toString());
+		setValue(`sin(${number})`);
 	}
 	function Cos() {
 		setNumber(Math.cos(number).toString());
+		setValue(`cos(${number})`);
 	}
 	function Tan() {
 		setNumber(Math.tan(number).toString());
+		setValue(`tan(${number})`);
 	}
 	function SquareRoot() {
 		setNumber(Math.sqrt(number).toString());
+		setValue(`√(${number})`);
 	}
 	function Square() {
 		setNumber(Math.pow(number, 2).toString());
+		setValue(`(${number})^2`);
 	}
 	function Pi() {
 		setNumber(Math.PI.toString());
@@ -53,14 +62,14 @@ function Calculator() {
 		setNumber(Math.log(number).toString());
 	}
 	return (
-		<div className="bg-[#1f1d21] w-screen h-screen p-4">
+		<div className="bg-[#1f1d21] w-screen h-screen p-4 main-div">
 			<div className="grid pt-8 text-transparent text-white text-5xl grid-props gap-4 justify-center place-content-center">
 				<div
 					id="output "
 					className="col-span-full  bg-[#DEDAE1] flex text-black flex-col justify-around break-words h-28 items-end"
 				>
 					<div id="prev" className="text-2xl p-2">
-						{number}
+						{value}
 					</div>
 					<div id="curr" className="text-5xl p-2">
 						{number}
@@ -68,7 +77,7 @@ function Calculator() {
 				</div>
 
 				<button
-					className=" rounded-lg text-4xl text-white hover:bg-[#DEDAE1] hover:text-[#7928CA] bg-[#7928CA]"
+					className=" rounded-lg text-4xl text-white hover:bg-[#DEDAE1] hover:text-[#7928CA] bg-[#7928CA] "
 					onClick={Sin}
 				>
 					Sin( )
