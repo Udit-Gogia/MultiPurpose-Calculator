@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import CEComp from "../Components/CurrencyComp";
 import "../Styles/CurrencyCSS.css";
+import CEComp from "../Components/CurrencyComp";
 
 const url =
-	"http://api.exchangeratesapi.io/v1/latest?access_key=6ddbf3110cc83865268b18842d4c8ade";
+	"http://api.exchangeratesapi.io/v1/latest?access_key=de42034d34bd2c297623111a6d3fb3c9&format=1";
 
 function CE() {
 	const [currencyOptions, setCurrencyOptions] = useState([]);
@@ -17,7 +17,7 @@ function CE() {
 
 	if (amountfrom) {
 		fromamount = amount;
-		toamount = amount * exchangerate;
+		toamount = amount * exchangerate || 0;
 	} else {
 		toamount = amount;
 		fromamount = amount / exchangerate;
@@ -29,10 +29,19 @@ function CE() {
 			.then((data) => {
 				setCurrencyOptions([data.base, ...Object.keys(data.rates)]);
 				setFromCurr(data.base);
+
 				setToCurr(Object.keys(data.rates)[0]);
 				setExchangerate(data.rates[Object.keys(data.rates)[0]]);
 			});
 	}, []);
+
+	useEffect(() => {
+		if (fromCurr !== undefined && toCurr !== undefined) {
+			fetch(`${url}?base=${fromCurr}&symbols=${toCurr}`)
+				.then((res) => res.json())
+				.then((data) => setExchangerate(data.rates[toCurr]));
+		}
+	}, [fromCurr, toCurr]);
 
 	function handleAmountChangeFrom(e) {
 		setAmount(e.target.value);
@@ -43,13 +52,6 @@ function CE() {
 		setAmountfrom(false);
 	}
 
-	useEffect(() => {
-		if (fromCurr != undefined && toCurr != undefined) {
-			fetch(`${url}?base=${fromCurr}&symbols=${toCurr}`)
-				.then((res) => res.json())
-				.then((data) => setExchangerate(data.rates[toCurr]));
-		}
-	}, [fromCurr, toCurr]);
 	return (
 		<div className="bg-[#1f1d21] w-screen h-screen p-4 flex items-center justify-center flex-col">
 			<div className="text-[#DEDAE1] text-5xl text-center">
