@@ -1,9 +1,9 @@
 import "./App.css";
-import CurrencyExchange from "./Pages/CurrencyExchange";
+import BMI from "./Pages/BMICalculator";
 function App() {
 	return (
 		<div className="App">
-			<CurrencyExchange />
+			<BMI />
 		</div>
 	);
 }
